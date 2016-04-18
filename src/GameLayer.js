@@ -14,14 +14,36 @@ var GameLayer = cc.LayerColor.extend({
 
         this.addKeyboardHandlers();
 
+        this.scoreLabel = cc.LabelTTF.create( '0', 'Arial', 40 );
+        this.scoreLabel.setPosition( new cc.Point( 770, 570 ) );
+        this.addChild( this.scoreLabel );
+        this.scoreDiff = 0;
+
         return true;
     },
     onKeyDown: function( keyCode, event ) {
-      console.log(keyCode);
+      // console.log(keyCode);
     },
     onKeyUp: function( keyCode, event ) {
       if( keyCode == 32){
         this.player.jump();
+        console.log(this.scoreDiff);
+
+        if(this.player.direction == "UP" && this.scoreDiff == 0){
+          this.scoreLabel.setString(parseInt(this.scoreLabel.string) + 1);
+        }else if(this.player.direction == "UP"){
+          console.log("------------------");
+          console.log(this.scoreDiff);
+          this.scoreDiff+=1;
+          console.log(this.scoreDiff);
+          console.log("------------------");
+        }else if(this.player.direction == "DOWN"){
+          console.log("------------------");
+          console.log(this.scoreDiff);
+          this.scoreDiff-=1;
+          console.log(this.scoreDiff);
+          console.log("------------------");
+        }
       }else if( keyCode == 37){
         this.player.turn(4);
       }else if( keyCode == 38){

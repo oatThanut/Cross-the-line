@@ -2,7 +2,7 @@ var Player = cc.Sprite.extend({
   ctor: function(){
     this._super();
     this.initWithFile( 'res/images/test.png' );
-    this.direction = 1;
+    this.direction = 'UP';
   },
   jump: function(){
     var position = this.getPosition();
