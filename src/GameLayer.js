@@ -8,16 +8,29 @@ var GameLayer = cc.LayerColor.extend({
         this.initialField();
         this.manageField();
 
+        this.player = new Player();
+        this.player.setPosition(new cc.Point(400,150));
+        this.addChild(this.player);
+
         this.addKeyboardHandlers();
 
         return true;
     },
     onKeyDown: function( keyCode, event ) {
-
-
+      console.log(keyCode);
     },
     onKeyUp: function( keyCode, event ) {
-
+      if( keyCode == 32){
+        this.player.jump();
+      }else if( keyCode == 37){
+        this.player.turn(4);
+      }else if( keyCode == 38){
+        this.player.turn(1);
+      }else if( keyCode == 39){
+        this.player.turn(2);
+      }else if( keyCode == 40){
+        this.player.turn(3);
+      }
     },
     addKeyboardHandlers: function() {
         var self = this;
@@ -35,17 +48,12 @@ var GameLayer = cc.LayerColor.extend({
       this.fieldArr = [];
       for (var i = 0; i < 10; i++) {
           this.fieldArr[i] = new Field(i);
-          // this.fieldArr[i].setPosition( new cc.Point(screenWidth/2.0,screenHeight/2.0));
           this.addChild(this.fieldArr[i]);
-          // this.fieldArr[i].randomPosition();
-          // this.fieldArr[i].scheduleUpdate();
       }
     },
     manageField: function(){
       var initialHeight = 30;
       for(var i = 0; i < 10; i++){
-        // this.fieldArr[i].setPosition( new cc.Point(screenWidth/2.0,screenHeight/2.0));
-        // this.addChild(this.fieldArr[i]);
         this.fieldArr[i].setPosition( new cc.Point(400,initialHeight));
         initialHeight+=60;
       }
