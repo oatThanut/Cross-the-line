@@ -32,6 +32,15 @@ var Player = cc.Sprite.extend({
       this.direction = 'LEFT';
       this.setRotation(270);
     }
+  },
+
+  getPositionX: function(){
+    var position = this.getPosition();
+    return position.x;
+  },
+  getPositionY: function(){
+    var position = this.getPosition();
+    return position.y;
   }
 
 });

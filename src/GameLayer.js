@@ -15,7 +15,7 @@ var GameLayer = cc.LayerColor.extend({
         this.addKeyboardHandlers();
 
         this.scoreLabel = cc.LabelTTF.create( '0', 'Arial', 40 );
-        this.scoreLabel.setPosition( new cc.Point( 770, 570 ) );
+        this.scoreLabel.setPosition( new cc.Point( 750, 570 ) );
         this.addChild( this.scoreLabel );
         this.scoreDiff = 0;
 
@@ -28,21 +28,26 @@ var GameLayer = cc.LayerColor.extend({
       if( keyCode == 32){
         this.player.jump();
         console.log(this.scoreDiff);
-
         if(this.player.direction == "UP" && this.scoreDiff == 0){
-          this.scoreLabel.setString(parseInt(this.scoreLabel.string) + 1);
+          if(this.player.getPositionY()>150){
+            this.scoreLabel.setString(parseInt(this.scoreLabel.string) + 1);
+            this.moveField();
+            this.switchField();
+          }
         }else if(this.player.direction == "UP"){
-          console.log("------------------");
-          console.log(this.scoreDiff);
+          // console.log("------------------");
+          // console.log(this.scoreDiff);
           this.scoreDiff+=1;
-          console.log(this.scoreDiff);
-          console.log("------------------");
+          // console.log(this.scoreDiff);
+          // console.log("------------------");
         }else if(this.player.direction == "DOWN"){
-          console.log("------------------");
-          console.log(this.scoreDiff);
-          this.scoreDiff-=1;
-          console.log(this.scoreDiff);
-          console.log("------------------");
+          // console.log("------------------");
+          // console.log(this.scoreDiff);
+          if(this.player.getPositionY()>30){
+            this.scoreDiff-=1;
+          }
+          // console.log(this.scoreDiff);
+          // console.log("------------------");
         }
       }else if( keyCode == 37){
         this.player.turn(4);
@@ -81,10 +86,20 @@ var GameLayer = cc.LayerColor.extend({
       }
     },
     switchField(){
-
+      for(var i = 0; i < 10; i++){
+        var tempFieldPosition = this.fieldArr[i].getPosition();
+        if(tempFieldPosition.y < 0){
+          this.fieldArr[i].setPosition(new cc.Point(400,570));
+        }
+      }
     },
-    moveField(){
-
+    moveField(){//shift the field downward
+      console.log("X : "+this.player.getPositionX()+" , Y : "+this.player.getPositionY());
+      this.player.setPosition( new cc.Point(this.player.getPositionX(),this.player.getPositionY()-60));
+      for (var i = 0; i < 10; i++) {
+        var tempFieldPosition = this.fieldArr[i].getPosition();
+        this.fieldArr[i].setPosition(new cc.Point(tempFieldPosition.x,(tempFieldPosition.y)-60));
+      }
     }
 });
 
