@@ -89,6 +89,12 @@ var GameLayer = cc.LayerColor.extend({
       for(var i = 0; i < 10; i++){
         var tempFieldPosition = this.fieldArr[i].getPosition();
         if(tempFieldPosition.y < 0){
+          if(Math.round(Math.random()*2) == 1){
+            this.fieldArr[i].DriveACar();
+          }else {
+
+            this.fieldArr[i].StopACar();
+          }
           this.fieldArr[i].setPosition(new cc.Point(400,570));
         }
       }
@@ -99,6 +105,7 @@ var GameLayer = cc.LayerColor.extend({
       for (var i = 0; i < 10; i++) {
         var tempFieldPosition = this.fieldArr[i].getPosition();
         this.fieldArr[i].setPosition(new cc.Point(tempFieldPosition.x,(tempFieldPosition.y)-60));
+
       }
     }
 });

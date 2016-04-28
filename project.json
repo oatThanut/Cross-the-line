@@ -15,6 +15,7 @@
         "src/resource.js",
         "src/GameLayer.js",
         "src/Field.js",
-        "src/Player.js"
+        "src/Player.js",
+        "src/Car.js"
     ]
 }
