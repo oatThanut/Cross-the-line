@@ -16,6 +16,9 @@
         "src/GameLayer.js",
         "src/Field.js",
         "src/Player.js",
-        "src/Car.js"
+        "src/Car.js",
+        "src/StartMenu.js",
+        "src/GameOver.js",
+        "src/HowToPlay.js"
     ]
 }

@@ -27,6 +27,7 @@ var GameLayer = cc.LayerColor.extend({
         // console.log(this.fieldArr[i].CheckClose(this.player));
         if(this.fieldArr[i].CheckClose(this.player)){
           console.log("END");
+          cc.director.runScene(new StartGameOverScene());
         }
       }
     },

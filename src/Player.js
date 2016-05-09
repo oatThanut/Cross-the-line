@@ -1,7 +1,15 @@
 var Player = cc.Sprite.extend({
   ctor: function(){
     this._super();
-    this.initWithFile( 'res/images/test.png' );
+    // this.initWithFile( 'res/images/player.png' );
+
+    var animation = new cc.Animation.create();
+    animation.addSpriteFrameWithFile( 'res/images/player.png' );
+    animation.addSpriteFrameWithFile( 'res/images/player1.png' );
+    animation.setDelayPerUnit( 0.4 );
+    var movingAction = cc.RepeatForever.create( cc.Animate.create( animation ) );
+    this.runAction( movingAction );
+
     this.direction = 'UP';
   },
   jump: function(){
