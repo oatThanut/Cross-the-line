@@ -19,7 +19,16 @@ var GameLayer = cc.LayerColor.extend({
         this.addChild( this.scoreLabel );
         this.scoreDiff = 0;
 
+        this.scheduleUpdate();
         return true;
+    },
+    update: function(){
+      for(var i = 0 ; i<10 ; i++){
+        // console.log(this.fieldArr[i].CheckClose(this.player));
+        if(this.fieldArr[i].CheckClose(this.player)){
+          console.log("END");
+        }
+      }
     },
     onKeyDown: function( keyCode, event ) {
       // console.log(keyCode);
@@ -27,7 +36,7 @@ var GameLayer = cc.LayerColor.extend({
     onKeyUp: function( keyCode, event ) {
       if( keyCode == 32){
         this.player.jump();
-        console.log(this.scoreDiff);
+        // console.log(this.scoreDiff);
         if(this.player.direction == "UP" && this.scoreDiff == 0){
           if(this.player.getPositionY()>150){
             this.scoreLabel.setString(parseInt(this.scoreLabel.string) + 1);
@@ -89,27 +98,27 @@ var GameLayer = cc.LayerColor.extend({
       for(var i = 0; i < 10; i++){
         var tempFieldPosition = this.fieldArr[i].getPosition();
         if(tempFieldPosition.y < 0){
+          //random start / stop
+
+          this.fieldArr[i].setPosition(new cc.Point(400,570));
           if(Math.round(Math.random()*2) == 1){
             this.fieldArr[i].DriveACar();
           }else {
-
             this.fieldArr[i].StopACar();
           }
-          this.fieldArr[i].setPosition(new cc.Point(400,570));
         }
       }
     },
     moveField(){//shift the field downward
-      console.log("X : "+this.player.getPositionX()+" , Y : "+this.player.getPositionY());
+      // console.log("X : "+this.player.getPositionX()+" , Y : "+this.player.getPositionY());
       this.player.setPosition( new cc.Point(this.player.getPositionX(),this.player.getPositionY()-60));
       for (var i = 0; i < 10; i++) {
         var tempFieldPosition = this.fieldArr[i].getPosition();
         this.fieldArr[i].setPosition(new cc.Point(tempFieldPosition.x,(tempFieldPosition.y)-60));
-
       }
     }
 });
-
+//cc.director.runScene(cc.TransitionTurnOffTile.creat(2.5, new StartGameOverScene()));
 
 var StartScene = cc.Scene.extend({
     onEnter: function() {

@@ -17,14 +17,23 @@ var Field = cc.Sprite.extend({
   },
   DriveACar: function(){
     this.random = Math.round(Math.random());
-    if(this.random == 0){
+    if(this.random == 0 && this.car[1].status == false){
       this.car[0].run();
-    }else{
+    }else if(this.random == 1 && this.car[0].status == false){
       this.car[1].run();
     }
   },
   StopACar: function(){
     this.car[0].stopCar();
     this.car[1].stopCar();
+  },
+  CheckClose: function(obj){
+    var yPosOfField = this.getPosition().y;
+    if(this.car[0].closeTo(obj, yPosOfField) || this.car[1].closeTo(obj, yPosOfField)){
+      return true;
+    }else{
+      return false;
+    }
   }
+
 });

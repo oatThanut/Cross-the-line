@@ -57,7 +57,6 @@
 cc.game.onStart = function(){
     if(!cc.sys.isNative && document.getElementById("cocosLoading")) //If referenced loading.js, please remove it
         document.body.removeChild(document.getElementById("cocosLoading"));
-
     // Pass true to enable retina display, on Android disabled by default to improve performance
     cc.view.enableRetina(cc.sys.os === cc.sys.OS_IOS ? true : false);
     // Adjust viewport meta
@@ -72,7 +71,6 @@ cc.game.onStart = function(){
     //load resources
     cc.LoaderScene.preload(g_resources, function () {
         cc.director.runScene(new StartScene());
-
     }, this);
 };
 cc.game.run();
