@@ -1,8 +1,6 @@
 var Player = cc.Sprite.extend({
   ctor: function(){
     this._super();
-    // this.initWithFile( 'res/images/player.png' );
-
     var animation = new cc.Animation.create();
     animation.addSpriteFrameWithFile( 'res/images/player.png' );
     animation.addSpriteFrameWithFile( 'res/images/player1.png' );

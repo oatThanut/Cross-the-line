@@ -35,5 +35,4 @@ var Field = cc.Sprite.extend({
       return false;
     }
   }
-
 });

@@ -1,18 +1,14 @@
 var GameLayer = cc.LayerColor.extend({
     init: function() {
         this._super(screenHeight,screenWidth);
-        // this.scheduleUpdate();
-
-        // this.setPosition( new cc.Point( 0, 0 ) );
-
         this.initialField();
         this.manageField();
+
+        this.addKeyboardHandlers();
 
         this.player = new Player();
         this.player.setPosition(new cc.Point(400,150));
         this.addChild(this.player);
-
-        this.addKeyboardHandlers();
 
         this.scoreLabel = cc.LabelTTF.create( '0', 'Arial', 40 );
         this.scoreLabel.setPosition( new cc.Point( 750, 570 ) );
@@ -24,20 +20,16 @@ var GameLayer = cc.LayerColor.extend({
     },
     update: function(){
       for(var i = 0 ; i<10 ; i++){
-        // console.log(this.fieldArr[i].CheckClose(this.player));
         if(this.fieldArr[i].CheckClose(this.player)){
-          console.log("END");
           cc.director.runScene(new StartGameOverScene());
         }
       }
     },
     onKeyDown: function( keyCode, event ) {
-      // console.log(keyCode);
     },
     onKeyUp: function( keyCode, event ) {
       if( keyCode == 32){
         this.player.jump();
-        // console.log(this.scoreDiff);
         if(this.player.direction == "UP" && this.scoreDiff == 0){
           if(this.player.getPositionY()>150){
             this.scoreLabel.setString(parseInt(this.scoreLabel.string) + 1);
@@ -45,19 +37,11 @@ var GameLayer = cc.LayerColor.extend({
             this.switchField();
           }
         }else if(this.player.direction == "UP"){
-          // console.log("------------------");
-          // console.log(this.scoreDiff);
           this.scoreDiff+=1;
-          // console.log(this.scoreDiff);
-          // console.log("------------------");
         }else if(this.player.direction == "DOWN"){
-          // console.log("------------------");
-          // console.log(this.scoreDiff);
           if(this.player.getPositionY()>30){
             this.scoreDiff-=1;
           }
-          // console.log(this.scoreDiff);
-          // console.log("------------------");
         }
       }else if( keyCode == 37){
         this.player.turn(4);
@@ -100,7 +84,6 @@ var GameLayer = cc.LayerColor.extend({
         var tempFieldPosition = this.fieldArr[i].getPosition();
         if(tempFieldPosition.y < 0){
           //random start / stop
-
           this.fieldArr[i].setPosition(new cc.Point(400,570));
           if(Math.round(Math.random()*2) == 1){
             this.fieldArr[i].DriveACar();
@@ -111,7 +94,6 @@ var GameLayer = cc.LayerColor.extend({
       }
     },
     moveField(){//shift the field downward
-      // console.log("X : "+this.player.getPositionX()+" , Y : "+this.player.getPositionY());
       this.player.setPosition( new cc.Point(this.player.getPositionX(),this.player.getPositionY()-60));
       for (var i = 0; i < 10; i++) {
         var tempFieldPosition = this.fieldArr[i].getPosition();
@@ -119,7 +101,6 @@ var GameLayer = cc.LayerColor.extend({
       }
     }
 });
-//cc.director.runScene(cc.TransitionTurnOffTile.creat(2.5, new StartGameOverScene()));
 
 var StartScene = cc.Scene.extend({
     onEnter: function() {

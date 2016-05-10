@@ -2,11 +2,11 @@ var GameOver = cc.LayerColor.extend({
   init: function(){
     this._super();
     this.addKeyboardHandlers();
+    this.quit();
 
     this.background = new backgroundGameOver();
     this.background.setPosition(400,300);
     this.addChild(this.background);
-
     return true;
   },
   addKeyboardHandlers: function() {
@@ -22,21 +22,19 @@ var GameOver = cc.LayerColor.extend({
       }, this);
   },
   onKeyDown: function( keyCode, event ) {
-    console.log(keyCode);
     if(keyCode == 13){
       cc.director.runScene( new StartScene());
     }
   },
   onKeyUp: function( keyCode, event ) {
-    // console.log(keyCode);
   },
   quit: function(){
-    this.quitButtonItem = new cc.MenuItemImage('res/images/startButton.png', 'res/images/startButton1.png', function(){
+    this.quitButtonItem = new cc.MenuItemImage('res/images/quitButton.png', 'res/images/quitButton1.png', function(){
       this.quitButton.setEnabled(false);
       cc.director.runScene( new StartMenuScene());
     },this);
     this.quitButton = new cc.Menu( this.quitButtonItem);
-    this.quitButton.setPosition(400,270);
+    this.quitButton.setPosition(400,300);
     this.addChild(this.quitButton);
   }
 });

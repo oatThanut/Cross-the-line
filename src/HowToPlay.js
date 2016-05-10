@@ -22,13 +22,11 @@ var HowToPlay = cc.LayerColor.extend({
       }, this);
   },
   onKeyDown: function( keyCode, event ) {
-    console.log(keyCode);
     if(keyCode == 13){
       cc.director.runScene( new StartMenuScene());
     }
   },
   onKeyUp: function( keyCode, event ) {
-    // console.log(keyCode);
   }
 });
 
